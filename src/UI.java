@@ -4,10 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -21,27 +23,45 @@ public class UI extends Application {
     public void start(Stage mainStage) {
         Canvas canvas = new Canvas(500,500);
 
-        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.initStyle(StageStyle.DECORATED);
         mainStage.setTitle("ping-pong");
 
-        MenuItem menuItem = new MenuItem("Exit");
+        MenuItem exitMenuItem = new MenuItem("Exit");
 
-        menuItem.setOnAction(new EventHandler<ActionEvent>() {
+        exitMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Platform.exit();
             }
         });
 
+        MenuItem aboutMenuItem = new MenuItem("About");
+        aboutMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Alert box = new Alert(Alert.AlertType.INFORMATION);
+                box.setTitle("About");
+                box.setContentText("David Manouchehri");
+                box.showAndWait();
+            }
+        });
 
-        final Menu menu = new Menu("File");
-        menu.getItems().add(menuItem);
+
+        final Menu fineMenu = new Menu("File");
+        fineMenu.getItems().add(exitMenuItem);
+        fineMenu.getItems().add(aboutMenuItem);
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().add(menu);
+        menuBar.getMenus().add(fineMenu);
+
+        VBox layout = new VBox();
+        layout.getChildren().addAll(menuBar);
+        // layout.getChildren().add(canvas);
+
+
 
         StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(layout);
         stackPane.getChildren().add(canvas);
-        stackPane.getChildren().add(menuBar);
 
         Scene stackScene = new Scene(stackPane);
         mainStage.setScene(stackScene);
