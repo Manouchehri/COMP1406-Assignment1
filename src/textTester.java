@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author David Manouchehri
  *         Created on 9/22/15 at 7:01 PM.
  *         See LICENSE.txt for details.
- *         This class should do the least amount of graphs operations possible.
+ *         This class should do the least amount of graphics as possible.
  */
 public class textTester extends Application {
     private ArrayList<Player> players = new ArrayList<>();
@@ -32,5 +32,7 @@ public class textTester extends Application {
         balls.add(new Ball());
         balls.get(0).color.rand();
         System.out.println(balls.get(0).color.get());
+        System.out.println(balls.get(0).position.getX());
+        System.out.println(balls.get(0).position.getY());
     }
 }
