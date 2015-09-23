@@ -4,12 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -20,12 +17,7 @@ import javafx.stage.StageStyle;
  */
 public class UI extends Application {
     @Override
-    public void start(Stage mainStage) {
-        Canvas canvas = new Canvas(500,500);
-
-        mainStage.initStyle(StageStyle.DECORATED);
-        mainStage.setTitle("ping-pong");
-
+    public void start(Stage stage) {
         MenuItem exitMenuItem = new MenuItem("Exit");
 
         exitMenuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -46,26 +38,25 @@ public class UI extends Application {
             }
         });
 
+        Canvas canvas = new Canvas(500,500);
+        stage.initStyle(StageStyle.DECORATED);
 
         final Menu fineMenu = new Menu("File");
-        fineMenu.getItems().add(exitMenuItem);
         fineMenu.getItems().add(aboutMenuItem);
+        fineMenu.getItems().add(exitMenuItem);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(fineMenu);
 
         VBox layout = new VBox();
         layout.getChildren().addAll(menuBar);
-        // layout.getChildren().add(canvas);
+        layout.getChildren().add(canvas);
 
 
 
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(layout);
-        stackPane.getChildren().add(canvas);
+        Scene stackScene = new Scene(layout);
 
-        Scene stackScene = new Scene(stackPane);
-        mainStage.setScene(stackScene);
-        mainStage.show();
+        stage.setScene(stackScene);
+        stage.show();
     }
 
     public static void main(String[] args) {
