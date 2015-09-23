@@ -11,7 +11,7 @@ public class Ball {
     private int size;
     private double speed;
 
-    private char color[] = {'1', '2', '3', '4', '5', '6'}; /* This is in hex. */
+    public ColorHex color = new ColorHex();
 
     private static int spaceX = 250;
     private static int spaceY = 350;
@@ -26,19 +26,4 @@ public class Ball {
         this.y = y;
     }
 
-    public Color getColorJ() {
-        String colorString = new String(color);
-        System.out.println(colorString);
-        return Color.web(colorString);
-    }
-
-    /* Use HTML colors. */
-    public String getColor() {
-        return new String(color);
-    }
-
-    public void setColor(String color) {
-        System.arraycopy(color.trim().toCharArray(), 0, this.color, 0, 6);
-        /* This allows some error tolerance when entering the colors. */
-    }
 }

@@ -30,7 +30,7 @@ public class textTester extends Application {
             System.out.printf("Name: " + player.getName() + "\tScore: " + player.score.getScore() + "\n");
         }
         balls.add(new Ball());
-        balls.get(0).setColor("1a34567");
-        System.out.println(balls.get(0).getColorJ());
+        balls.get(0).color.rand();
+        System.out.println(balls.get(0).color.get());
     }
 }

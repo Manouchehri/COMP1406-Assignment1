@@ -9,6 +9,7 @@ public class Player {
     private String name;
     private UUID id;
     public ScoreKeeper score;
+    public Paddle paddle = new Paddle();
 
     public Player(String name) {
         this.name = name;
