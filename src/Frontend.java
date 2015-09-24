@@ -25,7 +25,7 @@ public class Frontend extends Application {
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
     public static final Field field = new Field(500, 750);
-    private Physics physics = new Physics();
+    private Controller controller = new Controller();
     private ScoreBoard scoreBoard = new ScoreBoard();
     private Canvas canvas = new Canvas(field.getX(), field.getY());
 
@@ -77,16 +77,16 @@ public class Frontend extends Application {
                 KeyCode code = key.getCode();
                 switch(code) {
                     case LEFT:
-                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.LEFT);
+                        players.get(0).paddle = controller.move(players.get(0).paddle, Controller.Direction.LEFT);
                         break; /* This is suboptimal because the player can't press more than one key at a time. */
                     case RIGHT:
-                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.RIGHT);
+                        players.get(0).paddle = controller.move(players.get(0).paddle, Controller.Direction.RIGHT);
                         break;
                     case UP:
-                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.UP);
+                        players.get(0).paddle = controller.move(players.get(0).paddle, Controller.Direction.UP);
                         break;
                     case DOWN:
-                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.DOWN);
+                        players.get(0).paddle = controller.move(players.get(0).paddle, Controller.Direction.DOWN);
                         break;
                 }
                 paint(canvas);
