@@ -56,8 +56,20 @@ public class Frontend extends Application {
                 /* This is really laggy. Why? */
                 KeyCode code = key.getCode();
                 System.out.println(code);
-                if(code == KeyCode.LEFT)
-                    players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.LEFT);
+                switch(code) {
+                    case LEFT:
+                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.LEFT);
+                        break; /* This is suboptimal because the player can't press more than one key at a time. */
+                    case RIGHT:
+                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.RIGHT);
+                        break;
+                    case UP:
+                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.UP);
+                        break;
+                    case DOWN:
+                        players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.DOWN);
+                        break;
+                }
                 paint(canvas);
                 System.out.println(players.get(0).paddle.position.getX());
                 key.consume();

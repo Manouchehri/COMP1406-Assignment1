@@ -33,13 +33,13 @@ public class Physics {
     }
 
     public Paddle move(Paddle paddle, Direction direction) {
-        if(direction == Direction.LEFT && paddle.position.getX() > 0)
+        if(direction == Direction.LEFT && paddle.position.getX() - speed > 0)
             move(-1, 0, paddle.position);
-        else if(direction == Direction.RIGHT && paddle.position.getX() + paddle.getWidth() < Frontend.field.getX())
+        else if(direction == Direction.RIGHT && paddle.position.getX() + paddle.getWidth() + speed < Frontend.field.getX())
             move(1, 0, paddle.position);
-        else if(direction == Direction.UP && paddle.position.getY() > 0)
+        else if(direction == Direction.UP && paddle.position.getY() - speed > 0)
             move(0, -1, paddle.position);
-        else if(direction == Direction.DOWN && paddle.position.getY() + paddle.getHeight() < Frontend.field.getY())
+        else if(direction == Direction.DOWN && paddle.position.getY() + paddle.getHeight() + speed < Frontend.field.getY())
             move(0, 1, paddle.position);
         return paddle;
     }
