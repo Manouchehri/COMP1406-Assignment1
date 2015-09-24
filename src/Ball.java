@@ -45,4 +45,49 @@ public class Ball {
                          this.getRadius() * 2,  /* Draw with */
                          this.getRadius() * 2); /* diameter. */
     }
+
+    /* Start of physics code! */
+
+    public enum Direction {LEFT, RIGHT, UP, DOWN} /* Duplicate, remove? */
+    private Direction stateX = Direction.RIGHT; /* Default movements. Random instead maybe? */
+    private Direction stateY = Direction.DOWN;
+    private int speed = 3;
+
+    public void move() {
+        if(stateX == Direction.LEFT)
+            this.position.setX(this.position.getX() - speed);
+        else if(stateX == Direction.RIGHT)
+            this.position.setX(this.position.getX() + speed);
+        if(stateY == Direction.UP)
+            this.position.setY(this.position.getY() - speed);
+        else if(stateY == Direction.DOWN)
+            this.position.setY(this.position.getY() + speed);
+    }
+
+    public boolean bounce() {
+        //if(getBottom() > )
+
+
+        if(getRight() > Frontend.field.getX()) {
+            stateX = Direction.LEFT;
+            return false;
+        }
+        else if(getLeft() < 0) {
+            stateX = Direction.RIGHT;
+            return false;
+        }
+
+        if(getBottom() > Frontend.field.getY()) {
+            stateY = Direction.UP;
+            return false;
+        }
+        else if(getTop() < 0) {
+            stateY = Direction.DOWN;
+            return false;
+        }
+
+        return false;
+    }
+
+    /* End of physics code. */
 }

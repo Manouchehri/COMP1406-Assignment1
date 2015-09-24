@@ -32,9 +32,16 @@ public class Frontend extends Application {
     private AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
-            for(Player player : players) {
-                player.score.incrementScore();
+            for(Ball ball : balls) {
+                ball.move();
+                ball.bounce();
+
+                for(Player player : players) {
+                    player.score.incrementScore();
+                }
             }
+            paint(canvas);
+            // System.out.println(now);
         }
     };
 

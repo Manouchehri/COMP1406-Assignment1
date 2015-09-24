@@ -6,8 +6,6 @@
 
 public class Controller {
     public enum Direction {LEFT, RIGHT, UP, DOWN}
-    private Direction stateX;
-    private Direction stateY;
     private static final int speed = 10;
 
     private Positioning move(int x, int y, Positioning position) {
