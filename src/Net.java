@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 
 public class Net {
-    public ColorHex color = new ColorHex();
+    public Coloring color = new Coloring();
     public Positioning position;
 
     private int width, height;

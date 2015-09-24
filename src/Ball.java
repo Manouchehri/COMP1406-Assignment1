@@ -8,7 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class Ball {
     private int radius;
 
-    public ColorHex color = new ColorHex();
+    public Coloring color = new Coloring();
     public Positioning position;
 
     public Ball(int radius, int x, int y) {

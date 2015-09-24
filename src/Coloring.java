@@ -6,17 +6,15 @@ import java.util.Random;
  * @author David Manouchehri
  *         Created on 9/22/15 at 8:46 PM.
  *         See LICENSE.txt for details.
- *
- *         Most of this is unnecessary at the moment.
  */
-public class ColorHex {
+public class Coloring {
     private Color color;
     private byte transparency = 100;
 
-    public ColorHex() {
+    public Coloring() {
         this.rand();
     }
-    public ColorHex(Color color) {
+    public Coloring(Color color) {
         this.color = color;
     }
 
@@ -26,13 +24,11 @@ public class ColorHex {
 
     public void set(Color color) {
         this.color = color;
-        /* This allows some error tolerance when entering the colors. */
     }
 
     public void rand() {
         Random rand = new Random();
         this.color = new Color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), transparency / 100);
-        set(color);
     }
 
     public byte getTransparency() {
@@ -41,6 +37,6 @@ public class ColorHex {
 
     public void setTransparency(byte transparency) {
         this.transparency = transparency;
-        this.color = new Color (this.color.getRed(), this.color.getGreen(), this.color.getBlue(), this.transparency / 100);
+        this.color = new Color(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), this.transparency / 100);
     }
 }
