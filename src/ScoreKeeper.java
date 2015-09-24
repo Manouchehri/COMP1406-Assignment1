@@ -5,13 +5,18 @@
  */
 public class ScoreKeeper {
     private int score;
+
     public int getScore() {
-        return this.score;
+        return score;
     }
+
+    /*
     public void resetScore() {
-        this.score = 0;
+        score = 0;
     }
+    */
+
     public void incrementScore() {
-        this.score++;
+        score++;
     }
 }

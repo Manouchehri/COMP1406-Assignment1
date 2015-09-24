@@ -10,21 +10,21 @@ public class Player {
     private UUID id;
     public ScoreKeeper score;
     public Paddle paddle;
-
-    public static final Net net = new Net(0, Frontend.field.getY() - 10, Frontend.field.getX(), Frontend.field.getY());
+    private static final int netDepth = 10;
+    public static final Net net = new Net(0, Frontend.field.getY() - netDepth, Frontend.field.getX(), Frontend.field.getY());
 
     public Player(String name) {
         this.name = name;
         id = UUID.randomUUID();
         score = new ScoreKeeper();
-        paddle = new Paddle(Frontend.field.getX() / 2 - 100 / 2, 500, 100, 10); /* Not the nicest looking. */
+        paddle = new Paddle(Frontend.field.getX() / 2 - 100 / 2, 500, 100, 10); /* Not the nicest looking. Just put it in the middle-ish. */
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public UUID getID() {
-        return this.id;
+        return id;
     }
 }

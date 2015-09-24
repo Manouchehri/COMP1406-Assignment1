@@ -29,7 +29,7 @@ public class Paddle {
         painter.setFill(color.get());
         painter.fillRect(position.getX(),
                          position.getY(),
-                         this.width,
-                         this.height);
+                         width,
+                         height);
     }
 }

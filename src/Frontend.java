@@ -25,10 +25,11 @@ public class Frontend extends Application {
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
     public static final Field field = new Field(500, 750);
-    private Controller controller = new Controller();
+    private Controller controller = new Controller(); /* This should be moved to Player. */
     private ScoreBoard scoreBoard = new ScoreBoard();
     private Canvas canvas = new Canvas(field.getX(), field.getY());
 
+    private boolean timerStatus = false;
     private AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
@@ -43,21 +44,20 @@ public class Frontend extends Application {
                         if(players.isEmpty()) /* Reset if no players left. */
                             reset();
                     }
-
-
                 }
             }
             paint(canvas);
-            // System.out.println(now);
         }
     };
 
     private void startTimer() {
         timer.start();
+        timerStatus = true;
     }
 
     private void stopTimer() {
         timer.stop();
+        timerStatus = false;
     }
 
     public static void main(String[] args) {
@@ -71,20 +71,17 @@ public class Frontend extends Application {
 
         VBox vbox = new VBox(); /* Needed for layout. */
 
-        vbox.getChildren().addAll(buildMenu());
+        vbox.getChildren().addAll(buildMenu()); /* Throw menus in. */
+        vbox.getChildren().add(canvas); /* Stick the canvas/playing field below the menus. */
 
-
-        vbox.getChildren().add(canvas);
-
-        reset();
+        reset(); /* Right now this simply adds the default player. */
 
         stage.setScene(new Scene(vbox));
         stage.show();
 
-
-
         canvas.requestFocus();
-        timer.start(); /* Broken? */
+        startTimer();
+        /* Part of this should be forked to Player probably. */
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
                 /* This is really laggy. Why? */
@@ -110,9 +107,9 @@ public class Frontend extends Application {
     }
 
     public void reset() {
-        players.clear();
-        balls.clear();
-        players.add(new Player("Dave"));
+        players.clear(); /* Delete all players */
+        balls.clear();   /* and balls. */
+        players.add(new Player("Dave")); /* Add the default player. */
         balls.add(new Ball(50, 50, 50));
         paint(canvas);
     }
@@ -120,13 +117,13 @@ public class Frontend extends Application {
     private void paint(Canvas canvas) {
         GraphicsContext painter = canvas.getGraphicsContext2D();
 
-        painter.clearRect(0, 0, field.getX(), field.getY());
+        painter.clearRect(0, 0, field.getX(), field.getY()); /* Wipe everything. */
 
         for(Ball ball : balls) {
             ball.render(painter);
         }
 
-        String scoreHolder = "";
+        String scoreHolder = ""; /* This is the text that gets rendered on the canvas. */
 
         for(Player player : players) {
             player.paddle.render(painter);
@@ -138,6 +135,7 @@ public class Frontend extends Application {
     }
 
     public MenuBar buildMenu() {
+        /* Everything here should be self-explanatory. */
         MenuItem exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction(event -> Platform.exit());
 
@@ -146,19 +144,31 @@ public class Frontend extends Application {
 
         MenuItem aboutMenuItem = new MenuItem("About");
         aboutMenuItem.setOnAction(event -> {
-                Alert box = new Alert(Alert.AlertType.INFORMATION);
-                box.setTitle("About");
-                box.setContentText("David Manouchehri");
-                box.showAndWait();
-            }
+                    Alert box = new Alert(Alert.AlertType.INFORMATION);
+                    box.setTitle("About");
+                    box.setContentText("David Manouchehri");
+                    box.showAndWait();
+                }
         );
 
         final Menu fineMenu = new Menu("File");
         fineMenu.getItems().add(aboutMenuItem);
         fineMenu.getItems().add(resetMenuItem);
         fineMenu.getItems().add(exitMenuItem);
+
+        MenuItem pause = new MenuItem("Pause");
+        pause.setOnAction(event -> stopTimer());
+
+        MenuItem resume = new MenuItem("Resume");
+        resume.setOnAction(event -> startTimer());
+
+        final Menu statusMenu = new Menu("Status");
+        statusMenu.getItems().add(pause);
+        statusMenu.getItems().add(resume);
+
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(fineMenu);
+        menuBar.getMenus().add(statusMenu);
 
         return menuBar;
     }

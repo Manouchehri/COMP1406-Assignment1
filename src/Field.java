@@ -5,22 +5,23 @@
  */
 public class Field {
     private static final int space[] = new int[2];
+    /* The field is the playable area. */
 
     public Field(int x, int y) {
-        this.space[0] = x;
-        this.space[1] = y;
+        space[0] = x;
+        space[1] = y;
         /* Apparently Java doesn't want to let me set both at once. */
     }
 
     public int getX() {
-        return this.space[0];
+        return space[0];
     }
 
     public int getY() {
-        return this.space[1];
+        return space[1];
     }
 
     public int[] get() {
-        return this.space;
+        return space;
     }
 }

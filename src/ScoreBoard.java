@@ -12,8 +12,8 @@ public class ScoreBoard {
     private Positioning position = new Positioning(25, 25);
 
     public void render(GraphicsContext painter, String text) {
-        this.scoreUI = new Text(text);
-        painter.setFill(this.color.get());
-        painter.fillText(text, this.position.getX(), this.position.getY());
+        scoreUI = new Text(text);
+        painter.setFill(color.get());
+        painter.fillText(text, position.getX(), position.getY());
     }
 }

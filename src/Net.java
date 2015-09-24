@@ -15,15 +15,15 @@ public class Net {
     public Net(int x, int y, int width, int height) {
         this.width = width;
         this.height = height;
-        this.position = new Positioning(x, y);
-        this.color.setTransparency((byte) 10);
+        position = new Positioning(x, y);
+        color.setTransparency((byte) 10);
     }
 
     public void render(GraphicsContext painter) {
         painter.setFill(color.get());
         painter.fillRect(position.getX(),
-                position.getY(),
-                this.width,
-                this.height);
+                         position.getY(),
+                         width,
+                         height);
     }
 }

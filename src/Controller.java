@@ -24,5 +24,6 @@ public class Controller {
         else if(direction == Direction.DOWN && paddle.position.getY() + paddle.getHeight() + speed < Frontend.field.getY())
             move(0, 1, paddle.position);
         return paddle;
+        /* Basically, all this does is attempt to move the paddle, and then return the new paddle's position.*/
     }
 }
