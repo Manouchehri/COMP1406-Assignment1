@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
  *         See LICENSE.txt for details.
  */
 public class Paddle {
-    public Coloring color = new Coloring();
+    private Coloring color = new Coloring();
     public Positioning position;
 
     private int width, height;

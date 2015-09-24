@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Frontend extends Application {
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
-    private Field field = new Field(300, 700);
+    public static final Field field = new Field(300, 700);
 
 
     public static void main(String[] args) {
@@ -68,6 +68,7 @@ public class Frontend extends Application {
 
         for(Player player : players) {
             player.paddle.render(painter);
+            player.net.render(painter);
         }
     }
 

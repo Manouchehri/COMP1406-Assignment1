@@ -10,7 +10,9 @@ public class Player {
     private UUID id;
     public ScoreKeeper score;
     public Paddle paddle; // = new Paddle();
-    //public Net net = new Net();
+
+    public static final Net net = new Net(0, Frontend.field.getY() - 10, Frontend.field.getX(), Frontend.field.getY());
+    //
 
     public Player(String name) {
         this.name = name;

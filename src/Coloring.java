@@ -28,7 +28,7 @@ public class Coloring {
 
     public void rand() {
         Random rand = new Random();
-        this.color = new Color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), transparency / 100);
+        this.color = new Color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), transparency / 100.0);
     }
 
     public byte getTransparency() {
@@ -37,6 +37,6 @@ public class Coloring {
 
     public void setTransparency(byte transparency) {
         this.transparency = transparency;
-        this.color = new Color(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), this.transparency / 100);
+        this.color = new Color(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), this.transparency / 100.0);
     }
 }

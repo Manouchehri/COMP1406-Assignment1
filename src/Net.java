@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 
 public class Net {
-    public Coloring color = new Coloring();
+    private Coloring color = new Coloring();
     public Positioning position;
 
     private int width, height;
@@ -16,8 +16,8 @@ public class Net {
         this.width = width;
         this.height = height;
         this.position = new Positioning(x, y);
+        this.color.setTransparency((byte) 10);
     }
-
 
     public void render(GraphicsContext painter) {
         painter.setFill(color.get());
