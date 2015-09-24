@@ -1,5 +1,7 @@
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.Random;
+
 /**
  * @author David Manouchehri
  *         Created on 9/22/15 at 3:55 PM.
@@ -11,39 +13,44 @@ public class Ball {
     private Coloring color = new Coloring();
     public Positioning position;
 
+    public Ball(int radius) {
+        Random rand = new Random();
+        position = new Positioning(rand.nextInt(Frontend.field.getX()) / 2,
+                                   rand.nextInt(Frontend.field.getY()) / 2); /* This should always make the ball reachable. */
+        this.radius = radius;
+    }
+
     public Ball(int x, int y, int radius) {
         position = new Positioning(x, y);
-//        this.position.setX(x);
-//        this.position.setY(y);
         this.radius = radius;
     }
 
     public int getRadius() {
-        return this.radius;
+        return radius;
     }
 
     public int getTop() {
-        return this.position.getY() - this.radius;
+        return position.getY() - radius;
     }
 
     public int getBottom() {
-        return this.position.getY() + this.radius;
+        return position.getY() + radius;
     }
 
     public int getLeft() {
-        return this.position.getX() - this.radius;
+        return position.getX() - radius;
     }
 
     public int getRight() {
-        return this.position.getX() + this.radius;
+        return position.getX() + radius;
     }
 
     public void render(GraphicsContext painter) {
         painter.setFill(color.get());
-        painter.fillOval(position.getX() - this.getRadius(), /* Draw from the */
-                         position.getY() - this.getRadius(), /* top left.     */
-                         this.getRadius() * 2,  /* Draw with */
-                         this.getRadius() * 2); /* diameter. */
+        painter.fillOval(position.getX() - getRadius(), /* Draw from the */
+                         position.getY() - getRadius(), /* top left.     */
+                         getRadius() * 2,  /* Draw with */
+                         getRadius() * 2); /* diameter. */
     }
 
     /* Start of physics code! */
@@ -55,13 +62,13 @@ public class Ball {
 
     public void move() {
         if(stateX == Direction.LEFT)
-            this.position.setX(this.position.getX() - speed);
+            position.setX(position.getX() - speed);
         else if(stateX == Direction.RIGHT)
-            this.position.setX(this.position.getX() + speed);
+            position.setX(position.getX() + speed);
         if(stateY == Direction.UP)
-            this.position.setY(this.position.getY() - speed);
+            position.setY(position.getY() - speed);
         else if(stateY == Direction.DOWN)
-            this.position.setY(this.position.getY() + speed);
+            position.setY(position.getY() + speed);
     }
 
     public boolean bounce(Net net, Paddle paddle) {
@@ -82,9 +89,9 @@ public class Ball {
                 stateY = Direction.DOWN;
             }
             else if(getBottom() >= paddle.position.getY() /* If the ball has touched the paddle. */
-                    && (this.position.getX() > paddle.position.getX()                     /* Make sure the ball is within */
-                    && this.position.getX() < paddle.position.getX() + paddle.getWidth()) /* the width of the paddle.     */
-                    && !(getBottom() > paddle.position.getY() + this.getRadius())) /* If the player tries to "catch" the ball at the last second, */
+                    && (position.getX() > paddle.position.getX()                     /* Make sure the ball is within */
+                    && position.getX() < paddle.position.getX() + paddle.getWidth()) /* the width of the paddle.     */
+                    && !(getBottom() > paddle.position.getY() + getRadius())) /* If the player tries to "catch" the ball at the last second, */
                 stateY = Direction.UP;                                             /* it's only considered valid if less than half the ball has passed. */
         }
         return false;

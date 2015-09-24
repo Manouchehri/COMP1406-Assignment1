@@ -21,7 +21,9 @@ public class Field {
         return space[1];
     }
 
+    /*
     public int[] get() {
         return space;
     }
+    */
 }

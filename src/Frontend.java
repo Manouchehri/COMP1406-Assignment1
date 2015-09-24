@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author David Manouchehri
@@ -29,36 +30,7 @@ public class Frontend extends Application {
     private ScoreBoard scoreBoard = new ScoreBoard();
     private Canvas canvas = new Canvas(field.getX(), field.getY());
 
-    private boolean timerStatus = false;
-    private AnimationTimer timer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            for(Ball ball : balls) {
-                ball.move();
-
-                for(Player player : players) {
-                    player.score.incrementScore(); /* The score is multiplied by the number of balls in the field. */
-                    if(ball.bounce(player.net, player.paddle)) {
-                        players.remove(player); /* Game over! */
-
-                        if(players.isEmpty()) /* Reset if no players left. */
-                            reset();
-                    }
-                }
-            }
-            paint(canvas);
-        }
-    };
-
-    private void startTimer() {
-        timer.start();
-        timerStatus = true;
-    }
-
-    private void stopTimer() {
-        timer.stop();
-        timerStatus = false;
-    }
+    private Random rand = new Random();
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -100,7 +72,7 @@ public class Frontend extends Application {
                         players.get(0).paddle = controller.move(players.get(0).paddle, Controller.Direction.DOWN);
                         break;
                 }
-                paint(canvas);
+                paint(canvas); /* Not really needed, but why not? */
                 key.consume();
             }
         });
@@ -110,7 +82,8 @@ public class Frontend extends Application {
         players.clear(); /* Delete all players */
         balls.clear();   /* and balls. */
         players.add(new Player("Dave")); /* Add the default player. */
-        balls.add(new Ball(50, 50, 50));
+
+        balls.add(new Ball(rand.nextInt(25) + 10));
         paint(canvas);
     }
 
@@ -171,5 +144,36 @@ public class Frontend extends Application {
         menuBar.getMenus().add(statusMenu);
 
         return menuBar;
+    }
+
+    private boolean timerStatus = false;
+    private AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            for(Ball ball : balls) {
+                ball.move(); /* Move the ball into the next location. */
+
+                for(Player player : players) {
+                    player.score.incrementScore(); /* The score is multiplied by the number of balls in the field. */
+                    if(ball.bounce(player.net, player.paddle)) {
+                        players.remove(player); /* Game over! */
+
+                        if(players.isEmpty()) /* Reset if no players left. */
+                            reset();
+                    }
+                }
+            }
+            paint(canvas);
+        }
+    };
+
+    private void startTimer() {
+        timer.start();
+        timerStatus = true;
+    }
+
+    private void stopTimer() {
+        timer.stop();
+        timerStatus = false;
     }
 }
