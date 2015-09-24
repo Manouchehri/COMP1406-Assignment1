@@ -34,10 +34,17 @@ public class Frontend extends Application {
         public void handle(long now) {
             for(Ball ball : balls) {
                 ball.move();
-                ball.bounce();
 
                 for(Player player : players) {
-                    player.score.incrementScore();
+                    player.score.incrementScore(); /* The score is multiplied by the number of balls in the field. */
+                    if(ball.bounce(player.net, player.paddle)) {
+                        players.remove(player); /* Game over! */
+
+                        if(players.isEmpty()) /* Reset if no players left. */
+                            reset();
+                    }
+
+
                 }
             }
             paint(canvas);

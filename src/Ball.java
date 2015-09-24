@@ -64,28 +64,28 @@ public class Ball {
             this.position.setY(this.position.getY() + speed);
     }
 
-    public boolean bounce() {
-        //if(getBottom() > )
+    public boolean bounce(Net net, Paddle paddle) {
+        if(getBottom() > net.position.getY())
+            return true;
+        else {
+            if(getRight() > Frontend.field.getX()) {
+                stateX = Direction.LEFT;
+            }
+            else if(getLeft() < 0) {
+                stateX = Direction.RIGHT;
+            }
 
-
-        if(getRight() > Frontend.field.getX()) {
-            stateX = Direction.LEFT;
-            return false;
+            if(getBottom() > Frontend.field.getY()) {
+                stateY = Direction.UP;
+            }
+            else if(getTop() < 0) {
+                stateY = Direction.DOWN;
+            }
+            else if(getBottom() > paddle.position.getY()
+                    && (this.position.getX() > paddle.position.getX()
+                    && this.position.getX() < paddle.position.getX() + paddle.getWidth()))
+                stateY = Direction.UP;
         }
-        else if(getLeft() < 0) {
-            stateX = Direction.RIGHT;
-            return false;
-        }
-
-        if(getBottom() > Frontend.field.getY()) {
-            stateY = Direction.UP;
-            return false;
-        }
-        else if(getTop() < 0) {
-            stateY = Direction.DOWN;
-            return false;
-        }
-
         return false;
     }
 
