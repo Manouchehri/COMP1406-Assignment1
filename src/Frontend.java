@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,7 +24,7 @@ public class Frontend extends Application {
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
     public static final Field field = new Field(300, 700);
-
+    private Physics physics = new Physics();
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -52,8 +53,14 @@ public class Frontend extends Application {
         canvas.requestFocus();
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
-                System.out.print(key.getText());
-                // key.consume();
+                /* This is really laggy. Why? */
+                KeyCode code = key.getCode();
+                System.out.println(code);
+                if(code == KeyCode.LEFT)
+                    players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.LEFT);
+                paint(canvas);
+                System.out.println(players.get(0).paddle.position.getX());
+                key.consume();
             }
         });
     }

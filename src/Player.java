@@ -9,16 +9,15 @@ public class Player {
     private String name;
     private UUID id;
     public ScoreKeeper score;
-    public Paddle paddle; // = new Paddle();
+    public Paddle paddle;
 
     public static final Net net = new Net(0, Frontend.field.getY() - 10, Frontend.field.getX(), Frontend.field.getY());
-    //
 
     public Player(String name) {
         this.name = name;
         id = UUID.randomUUID();
         score = new ScoreKeeper();
-        paddle = new Paddle(10, 100, 100, 10);
+        paddle = new Paddle(100, 500, 100, 10);
     }
 
     public String getName() {
