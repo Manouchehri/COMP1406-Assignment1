@@ -16,6 +16,7 @@ public class Player {
         this.name = name;
         id = UUID.randomUUID();
         score = new ScoreKeeper();
+        paddle = new Paddle(10, 100, 100, 10);
     }
 
     public String getName() {

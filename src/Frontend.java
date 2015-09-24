@@ -39,36 +39,7 @@ public class Frontend extends Application {
 
         VBox vbox = new VBox(); /* Needed for layout. */
 
-        /* Start of menus*/
-        MenuItem exitMenuItem = new MenuItem("Exit");
-
-        exitMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Platform.exit();
-            }
-        });
-
-        MenuItem aboutMenuItem = new MenuItem("About");
-        aboutMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Alert box = new Alert(Alert.AlertType.INFORMATION);
-                box.setTitle("About");
-                box.setContentText("David Manouchehri");
-                box.showAndWait();
-            }
-        });
-
-        final Menu fineMenu = new Menu("File");
-        fineMenu.getItems().add(aboutMenuItem);
-        fineMenu.getItems().add(exitMenuItem);
-        MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().add(fineMenu);
-
-        vbox.getChildren().addAll(menuBar);
-
-        /* End of menus. */
+        vbox.getChildren().addAll(buildMenu());
 
         Canvas canvas = new Canvas(field.getX(), field.getY());
         vbox.getChildren().add(canvas);
@@ -81,14 +52,11 @@ public class Frontend extends Application {
 
         paint(canvas);
 
-
-
         for(Player player : players) {
             System.out.printf("Name: " + player.getName() + "\tScore: " + player.score.getScore() + "\n");
         }
-
-
     }
+
     private void paint(Canvas canvas) {
         GraphicsContext painter = canvas.getGraphicsContext2D();
 
@@ -97,5 +65,32 @@ public class Frontend extends Application {
         for(Ball ball : balls) {
             ball.render(painter);
         }
+
+        for(Player player : players) {
+            player.paddle.render(painter);
+        }
+    }
+
+    public MenuBar buildMenu() {
+        MenuItem exitMenuItem = new MenuItem("Exit");
+
+        exitMenuItem.setOnAction(event -> Platform.exit());
+
+        MenuItem aboutMenuItem = new MenuItem("About");
+        aboutMenuItem.setOnAction(event -> {
+                Alert box = new Alert(Alert.AlertType.INFORMATION);
+                box.setTitle("About");
+                box.setContentText("David Manouchehri");
+                box.showAndWait();
+            }
+        );
+
+        final Menu fineMenu = new Menu("File");
+        fineMenu.getItems().add(aboutMenuItem);
+        fineMenu.getItems().add(exitMenuItem);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(fineMenu);
+
+        return menuBar;
     }
 }
