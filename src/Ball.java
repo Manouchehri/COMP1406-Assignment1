@@ -39,7 +39,7 @@ public class Ball {
     }
 
     public void render(GraphicsContext painter) {
-        painter.setFill(color.getJ());
+        painter.setFill(color.get());
         painter.fillOval(position.getX() - this.getRadius(), /* Draw from the */
                          position.getY() - this.getRadius(), /* top left.     */
                          this.getRadius() * 2,  /* Draw with */

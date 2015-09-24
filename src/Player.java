@@ -10,7 +10,7 @@ public class Player {
     private UUID id;
     public ScoreKeeper score;
     public Paddle paddle; // = new Paddle();
-    public Net net = new Net();
+    //public Net net = new Net();
 
     public Player(String name) {
         this.name = name;

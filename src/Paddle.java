@@ -19,7 +19,7 @@ public class Paddle {
 
 
     public void render(GraphicsContext painter) {
-        painter.setFill(color.getJ());
+        painter.setFill(color.get());
         painter.fillRect(position.getX(),
                          position.getY(),
                          this.width,
