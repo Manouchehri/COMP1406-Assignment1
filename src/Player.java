@@ -9,7 +9,8 @@ public class Player {
     private String name;
     private UUID id;
     public ScoreKeeper score;
-    public Paddle paddle = new Paddle();
+    public Paddle paddle; // = new Paddle();
+    public Net net = new Net();
 
     public Player(String name) {
         this.name = name;
