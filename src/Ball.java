@@ -83,8 +83,9 @@ public class Ball {
             }
             else if(getBottom() > paddle.position.getY()
                     && (this.position.getX() > paddle.position.getX()
-                    && this.position.getX() < paddle.position.getX() + paddle.getWidth()))
-                stateY = Direction.UP;
+                    && this.position.getX() < paddle.position.getX() + paddle.getWidth())
+                    && !(getBottom() > paddle.position.getY() + this.getRadius())) /* If the player tries to "catch" the ball at the last second, */
+                stateY = Direction.UP;                                             /* it's only considered valid if less than half the ball has passed. */
         }
         return false;
     }
