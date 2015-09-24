@@ -4,7 +4,7 @@
  *         See LICENSE.txt for details.
  */
 public class Ball {
-    private int size;
+    private int radius;
     private double speed;
 
     public ColorHex color = new ColorHex();
@@ -12,5 +12,9 @@ public class Ball {
 
     public Ball() {
 
+    }
+
+    public int getRadius() {
+        return this.radius;
     }
 }
