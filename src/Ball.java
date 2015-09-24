@@ -11,7 +11,7 @@ public class Ball {
     private Coloring color = new Coloring();
     public Positioning position;
 
-    public Ball(int radius, int x, int y) {
+    public Ball(int x, int y, int radius) {
         position = new Positioning(x, y);
 //        this.position.setX(x);
 //        this.position.setY(y);

@@ -4,7 +4,7 @@
  *         See LICENSE.txt for details.
  */
 public class Field {
-    private static final int space[] = new int[2]; // {300, 750}; /* This is for the canvas size. */
+    private static final int space[] = new int[2];
 
     public Field(int x, int y) {
         this.space[0] = x;

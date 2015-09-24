@@ -17,7 +17,6 @@ public class Paddle {
         this.position = new Positioning(x, y);
     }
 
-
     public void render(GraphicsContext painter) {
         painter.setFill(color.get());
         painter.fillRect(position.getX(),

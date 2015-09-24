@@ -1,6 +1,5 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -9,18 +8,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 
 /**
  * @author David Manouchehri
  *         Created on 9/22/15 at 7:01 PM.
  *         See LICENSE.txt for details.
- *         This class should do the least amount of graphics as possible.
  */
 public class Frontend extends Application {
     private ArrayList<Player> players = new ArrayList<>();
@@ -45,16 +42,20 @@ public class Frontend extends Application {
         vbox.getChildren().add(canvas);
 
         players.add(new Player("Dave"));
-        balls.add(new Ball(10, 100, 200));
+        balls.add(new Ball(50, 50, 50));
 
         stage.setScene(new Scene(vbox));
         stage.show();
 
         paint(canvas);
 
-        for(Player player : players) {
-            System.out.printf("Name: " + player.getName() + "\tScore: " + player.score.getScore() + "\n");
-        }
+        canvas.requestFocus();
+        canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent key) {
+                System.out.print(key.getText());
+                // key.consume();
+            }
+        });
     }
 
     private void paint(Canvas canvas) {

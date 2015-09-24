@@ -5,8 +5,6 @@
  */
 
 public class Physics {
-
-    public Field field = new Field(750, 250);
     private enum Direction {LEFT, RIGHT, UP, DOWN}
     private Direction stateX;
     private Direction stateY;
