@@ -23,15 +23,16 @@ import java.util.ArrayList;
 public class Frontend extends Application {
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
-    public static final Field field = new Field(300, 700);
+    public static final Field field = new Field(500, 750);
     private Physics physics = new Physics();
+    Canvas canvas = new Canvas(field.getX(), field.getY());
 
     public static void main(String[] args) {
         Application.launch(args);
     }
     @Override
     public void start(Stage stage) {
-        stage.initStyle(StageStyle.DECORATED);
+        stage.initStyle(StageStyle.UTILITY); /* Not needed on Windows. */
         stage.setTitle("ping-pong");
         stage.setResizable(false); /* Hopefully remove this later. My tiling window manager hates it. */
 
@@ -39,16 +40,15 @@ public class Frontend extends Application {
 
         vbox.getChildren().addAll(buildMenu());
 
-        Canvas canvas = new Canvas(field.getX(), field.getY());
+
         vbox.getChildren().add(canvas);
 
-        players.add(new Player("Dave"));
-        balls.add(new Ball(50, 50, 50));
+        reset();
 
         stage.setScene(new Scene(vbox));
         stage.show();
 
-        paint(canvas);
+
 
         canvas.requestFocus();
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -77,6 +77,14 @@ public class Frontend extends Application {
         });
     }
 
+    public void reset() {
+        players.clear();
+        balls.clear();
+        players.add(new Player("Dave"));
+        balls.add(new Ball(50, 50, 50));
+        paint(canvas);
+    }
+
     private void paint(Canvas canvas) {
         GraphicsContext painter = canvas.getGraphicsContext2D();
 
@@ -94,8 +102,10 @@ public class Frontend extends Application {
 
     public MenuBar buildMenu() {
         MenuItem exitMenuItem = new MenuItem("Exit");
-
         exitMenuItem.setOnAction(event -> Platform.exit());
+
+        MenuItem resetMenuItem = new MenuItem("Reset");
+        resetMenuItem.setOnAction(event -> reset());
 
         MenuItem aboutMenuItem = new MenuItem("About");
         aboutMenuItem.setOnAction(event -> {
@@ -108,6 +118,7 @@ public class Frontend extends Application {
 
         final Menu fineMenu = new Menu("File");
         fineMenu.getItems().add(aboutMenuItem);
+        fineMenu.getItems().add(resetMenuItem);
         fineMenu.getItems().add(exitMenuItem);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(fineMenu);
