@@ -1,3 +1,4 @@
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -25,7 +26,25 @@ public class Frontend extends Application {
     private ArrayList<Ball> balls = new ArrayList<>();
     public static final Field field = new Field(500, 750);
     private Physics physics = new Physics();
-    Canvas canvas = new Canvas(field.getX(), field.getY());
+    private ScoreBoard scoreBoard = new ScoreBoard();
+    private Canvas canvas = new Canvas(field.getX(), field.getY());
+
+    private AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            for(Player player : players) {
+                player.score.incrementScore();
+            }
+        }
+    };
+
+    private void startTimer() {
+        timer.start();
+    }
+
+    private void stopTimer() {
+        timer.stop();
+    }
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -51,11 +70,11 @@ public class Frontend extends Application {
 
 
         canvas.requestFocus();
+        timer.start(); /* Broken? */
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
                 /* This is really laggy. Why? */
                 KeyCode code = key.getCode();
-                System.out.println(code);
                 switch(code) {
                     case LEFT:
                         players.get(0).paddle = physics.move(players.get(0).paddle, Physics.Direction.LEFT);
@@ -71,7 +90,6 @@ public class Frontend extends Application {
                         break;
                 }
                 paint(canvas);
-                System.out.println(players.get(0).paddle.position.getX());
                 key.consume();
             }
         });
@@ -94,10 +112,15 @@ public class Frontend extends Application {
             ball.render(painter);
         }
 
+        String scoreHolder = "";
+
         for(Player player : players) {
             player.paddle.render(painter);
             player.net.render(painter);
+
+            scoreHolder += (player.getName() + ": " + player.score.getScore() + "\n");
         }
+        scoreBoard.render(painter, scoreHolder);
     }
 
     public MenuBar buildMenu() {

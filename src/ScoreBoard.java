@@ -1,4 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Text;
 
 /**
  * @author David Manouchehri
@@ -6,7 +7,13 @@ import javafx.scene.canvas.GraphicsContext;
  *         See LICENSE.txt for details.
  */
 public class ScoreBoard {
-    public void render(GraphicsContext painter) {
+    Text scoreUI;
+    private Coloring color = new Coloring();
+    private Positioning position = new Positioning(25, 25);
 
+    public void render(GraphicsContext painter, String text) {
+        this.scoreUI = new Text(text);
+        painter.setFill(this.color.get());
+        painter.fillText(text, this.position.getX(), this.position.getY());
     }
 }
