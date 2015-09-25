@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * @author David Manouchehri
  *         Created on 9/22/15 at 9:05 PM.
@@ -20,7 +18,7 @@ public class Positioning {
 
     public Positioning(Field field) {
         this(random.nextInt(field.getX()), random.nextInt(field.getY()));
-        *//* This is basically the "random" placement. Probably will never be used. *//*
+        // This is basically the "random" placement. Probably will never be used.
     }
     */
 

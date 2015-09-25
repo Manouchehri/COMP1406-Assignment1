@@ -1,4 +1,4 @@
-import java.util.UUID;
+// import java.util.UUID;
 
 /**
  * @author David Manouchehri
@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class Player {
     private String name;
-    private UUID id;
+    // private UUID id;
     public ScoreKeeper score;
     public Paddle paddle;
     private static final int netDepth = 10;
@@ -15,16 +15,23 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        id = UUID.randomUUID();
+        // id = UUID.randomUUID();
         score = new ScoreKeeper();
-        paddle = new Paddle(Frontend.field.getX() / 2 - 100 / 2, 500, 100, 10); /* Not the nicest looking. Just put it in the middle-ish. */
+        int paddleWidth = 100;
+        int paddleHeight = 10;
+        paddle = new Paddle(Frontend.field.getX() / 2 - paddleWidth / 2,
+                            3 * Frontend.field.getY() / 4,
+                            paddleWidth,
+                            paddleHeight); /* Not the nicest looking. Just put it in the middle-ish. */
     }
 
     public String getName() {
         return name;
     }
 
+    /*
     public UUID getID() {
         return id;
     }
+    */
 }

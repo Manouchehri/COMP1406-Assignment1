@@ -1,5 +1,4 @@
 import javafx.scene.paint.Color;
-import java.util.Random;
 
 /**
  * @author David Manouchehri
@@ -13,13 +12,15 @@ public class Coloring {
     public Coloring() {
         this.rand();
     }
+
+    /*
     public Coloring(Color color) {
-        this.color = color; /* If the user picks a color, let them use it. */
+        this.color = color; // If the user picks a color, let them use it.
     }
+    */
 
     public void rand() {
-        Random rand = new Random();
-        color = new Color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), transparency / 100.0);
+        color = new Color(Frontend.rand.nextDouble(), Frontend.rand.nextDouble(), Frontend.rand.nextDouble(), transparency / 100.0);
         /* Manually controlling the transparency seems like a better idea to avoid it being "invisible". */
     }
 
@@ -27,13 +28,15 @@ public class Coloring {
         return color;
     }
 
+    /*
     public void set(Color color) {
-        this.color = color; /* Maybe changing the colors during the game would be interesting? */
+        this.color = color; // Maybe changing the colors during the game would be interesting?
     }
 
     public byte getTransparency() {
         return transparency;
     }
+    */
 
     public void setTransparency(byte transparency) {
         this.transparency = transparency;

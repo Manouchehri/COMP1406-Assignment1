@@ -1,7 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.Random;
-
 /**
  * @author David Manouchehri
  *         Created on 9/22/15 at 3:55 PM.
@@ -14,9 +12,8 @@ public class Ball {
     public Positioning position;
 
     public Ball(int radius) {
-        Random rand = new Random();
-        position = new Positioning(rand.nextInt(Frontend.field.getX()) / 2,
-                                   rand.nextInt(Frontend.field.getY()) / 2); /* This should always make the ball reachable. */
+        position = new Positioning(Frontend.rand.nextInt(Frontend.field.getX()) / 2,
+                                   Frontend.rand.nextInt(Frontend.field.getY()) / 2); /* This should always make the ball reachable. */
         this.radius = radius;
     }
 

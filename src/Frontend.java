@@ -30,7 +30,8 @@ public class Frontend extends Application {
     private ScoreBoard scoreBoard = new ScoreBoard();
     private Canvas canvas = new Canvas(field.getX(), field.getY());
 
-    private Random rand = new Random();
+    public static Random rand = new Random(); /* Single threaded programs can share their random. */
+                                       /* Should be slightly more efficient too. */
 
     public static void main(String[] args) {
         Application.launch(args);
